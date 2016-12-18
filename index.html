@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>OwenJeff.GitHubPortfolio</title>
+
+<meta name=‘viewport’ content=‘initial-scale=1,maximum-scale=1,user-scalable=no’ />
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />    
+<link href='http://fonts.googleapis.com/css?family=Imprima' rel='stylesheet' type='text/css'>
+
+<style>
+    
+body {  
+    background: #f5f5f5;   
+    font-family: Imprima, sans-serif;
+}
+header {
+        width: 100%;
+        min-width: 800px;
+        margin: 0 auto;
+        background: green;
+        padding: 15px 0 20px;
+    }
+h1 {
+    font-family: Dosis, sans-serif;
+    color: #375671;
+    width: 80%;
+    margin: 0 auto;
+    color: whitesmoke;
+}
+h2 {
+    font-family: Dosis, sans-serif;
+    color: #375671;
+    width: 80%;
+    margin: 0 auto;
+    color: whitesmoke;
+}
+h3 {
+    font-family: Dosis, sans-serif;
+    color: green
+}
+p {
+    font-size: .9em;
+    color: green;
+}
+ul {
+    list-style-type: none;
+    font-size: .9em;
+    color: green;
+    line-height: 1.6em;
+}
+a, a:visited {   
+    color: green;
+}
+.project {
+    width: 80%;
+    min-width: 800px;
+    height: 100%;
+    margin: 35px auto;
+}
+.project:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.project-image {
+    width: 388px;
+    height: 200px;
+    background: white;
+    float: left;
+    margin-right: 20px;
+    border: 2px solid #dddddd;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Owen Mickelson Web Mapping Portfolio</h1>
+    <h2>MAP 672 Class At University Of Kentucky</h2>
+    
+</header>
+    
+<section class="project">
+    <a target = '_blank' href="Pacific Crest Trail Pic.jpg"><img src="Pacific Crest Trail Pic.jpg" alt="Pacific Crest Trail" class="project-image" /></a>
+    <h3>Pacific Crest Trail</h3>
+    <p>This is a topographic map showing the Pacific Crest Trail.</p>
+    <p>The map was generated in QGIS and converted to a PDF file.</p>
+    <ul>
+        <li>See the map: <a target = '_blank'  href="Pacific%20Crest%20Trail.pdf">Pacific Crest Trail</a></li>
+        <li>Data Source: <a target = '_blank'  href="http://www.raiszmaps.com/">Raisz Maps</a></li>
+    </ul>
+</section>
+    
+<section class="project">
+   <a target = '_blank' href="Appalachian Trail.jpg"><img src="Appalachian Trail.jpg" alt="Appalachian Trail" class="project-image" /></a>
+    <h3>Appalachian Trail</h3>
+    <p>The map was build using QGIS for X processing and used CartoDB CartoCSS styles to do Y and Z ...</p>
+    <ul>
+        <li>See the map: <a target = '_blank'  href="https://jeffowen.carto.com/viz/fd94dd38-7635-11e6-a922-0ef24382571b/public_map">Appalachian Trail</a></li>
+        <li>Data Sources: <a target = '_blank'  href="http://topofusion.com/at-gps.php">Topo Fusion</a> and <a target = '_blank' href="https://www.epa.gov/eco-research/ecoregions">Environmental Protection Agency</a></li>
+    </ul>
+</section>
+    
+<section class="project">
+   <a target = '_blank' href="Clean Energy Sources.jpg"><img src="Clean Energy Sources.jpg" alt="Clean Energy Sources" class="project-image" /></a>
+    <h3>Clean Energy Sources</h3>
+    <p>This map was built with custom JavaScript code drawing upon the Leaflet JavaScript Library, bla bla bla</p>
+    <ul>
+        <li>See the map: <a target = '_blank'  href="http://owenjeff.github.io/lab-08-data/index.html">Clean Energy Sources</a></li>
+        <li>Data Source: <a target = '_blank'  href="https://raw.githubusercontent.com/newmapsplus/map672-fall16/master/module-08/lab-08/lab-08-data/power-plants.js?token=AVtIT7Cr4cEjMLY-cYdbN1KvBR_gdKAKks5YXzeVwA%3D%3D">Power Plants GeoJson</a></li>
+    </ul>
+</section>
+    
+</body>
+</html>
