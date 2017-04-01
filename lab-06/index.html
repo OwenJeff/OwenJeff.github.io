@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <title>Boulder, Colorado Trails</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+
+
+
+    <style>
+        body {
+            left: 0px;
+            height: 100%;
+            overflow: visible;
+        }
+        
+        #map {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 75%;
+            padding: 0;
+            margin: 0;
+            background: 'white';
+            border-left: 1px solid green;
+        }
+        
+        div.cartodb-legend-stack {
+            position: fixed;
+            right: 0px;
+            bottom: 15px;
+        }
+        
+        .cartodb-legend ul li {
+            margin-left: 5px;
+            font-size: 10px;
+        }
+        
+        .cartodb-legend img {
+            margin-left: 20px;
+        }
+        
+        li,
+        h1,
+        h2,
+        p {
+            padding-right: 20px;
+            padding-left: 10px;
+            text-align: left;
+            font-family: sans-serif;
+        }
+        
+        img {
+            width: 95%;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class='grid'>
+        <div id="left" style="float: left; width: 25%;">
+            <h1 class='txt-headline mb6-gray'>Hiking in Boulder, Colorado</h1>
+            <a target='_blank' href="https://cdn-co.milespartnership.com/sites/default/master/files/styles/media-player-large/public/Natural2_Flatirons_Emerson12flickr.jpg"><img src="Natural2_Flatirons_Emerson12flickr.jpg"></a>
+            <p>- Click <a target='_blank' class='link' href='http://www.colorado.com/cities-and-towns/boulder'>here</a> to learn more about things to do in Boulder, Colorado</p>
+            <h2 class='txt-xl mt18-gray mb12-gray'>About This Map</h2>
+            <p>This map shows all the best hiking and multi use trails in and around the city of Boulder, Colorado. On this map there are data layers displaying recreational areas, trails, and trailheads. Each one is seperated out by its own attribute. The recreational areas are based off land type, trails are based off length, and trailheads are based off elevation.</p>
+            <footer class='mt12 bg-gray-faint txt-s'>
+                <ul>
+                    <li>Explore the raw data at <a target='_blank' class='link' href='https://bouldercolorado.gov/osmp/trails-and-maps'>City of Boulder, Colorado</a></li>
+                    <li>Map authored by <a target='_blank' class='link' href='https://github.com/OwenJeff'>Owen Mickelson</a></li>
+                </ul>
+            </footer>
+        </div>
+    </div>
+
+
+
+
+    <div id="map"></div>
+
+
+    <div class="cartodb-legend-stack">
+
+        <div class="cartodb-legend custom">
+
+            <div class="legend-title">Recreational Land Types</div>
+
+            <ul>
+
+
+                <li>
+                    <div class="bullet" style="background-color:#5F4690;"></div>Natural Area</li>
+
+                <li>
+                    <div class="bullet" style="background-color:#1D6996;"></div>Passive Recreation Area</li>
+
+                <li>
+                    <div class="bullet" style="background-color:#38A6A5;"></div>Habitat Conservation Area</li>
+
+                <li>
+                    <div class="bullet" style="background-color:#0F8554;"></div>Agricultural Area</li>
+
+                <li>
+                    <div class="bullet" style="background-color:#73AF48;"></div>Natural Area - Conditional</li>
+
+                <li>
+                    <div class="bullet" style="background-color:#EDAD08;"></div>Habitat Conservation Area - Conditional</li>
+
+                <li>
+                    <div class="bullet" style="background-color:#E17C05;"></div>Passive Recreation Area - Conditional</li>
+
+                <li>
+                    <div class="bullet" style="background-color:#94346E;"></div>Agricultural Area - Conditional</li>
+
+                <li>
+                    <div class="bullet" style="background-color:#CC503E;"></div>To Be Determined</li>
+
+
+            </ul>
+
+        </div>
+
+        <div class="cartodb-legend custom">
+
+            <div class="legend-title">Trails</div>
+
+            <div class='cartodb-legend density'>
+                <ul>
+                    <li class="min">
+                        Miles
+                    </li>
+
+                    <li class="graph leg" style="border-radius: 0; border:none">
+                        <div class="colors">
+                            <div class="quartile" style="background-color:#ffc6c4"></div>
+                            <div class="quartile" style="background-color:#ee919b"></div>
+                            <div class="quartile" style="background-color:#cc607d"></div>
+                            <div class="quartile" style="background-color:#9e3963"></div>
+                            <div class="quartile" style="background-color:#672044"></div>
+                        </div>
+                        <div class="colors" style="font-weight:normal; text-align: center">
+                            <div class="quartile" style="padding-top: 5px">0.0-0.6</div>
+                            <div class="quartile" style="padding-top: 5px">0.6-1.3</div>
+                            <div class="quartile" style="padding-top: 5px">1.3-1.9</div>
+                            <div class="quartile" style="padding-top: 5px">1.9-2.6</div>
+                            <div class="quartile" style="padding-top: 5px">2.6-3.2</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+
+        <div class="cartodb-legend custom">
+
+            <div class="legend-title">Trailheads</div>
+
+            <div class='cartodb-legend density'>
+                <ul>
+                    <li class="min">
+                        Elevation
+                    </li>
+
+                    <li class="graph leg" style="border-radius: 0; border:none">
+                        <div class="colors">
+                            <div class="quartile" style="background-color:#ecda9a"></div>
+                            <div class="quartile" style="background-color:#f1b973"></div>
+                            <div class="quartile" style="background-color:#f7945d"></div>
+                            <div class="quartile" style="background-color:#f86f56"></div>
+                            <div class="quartile" style="background-color:#ee4d5a"></div>
+                        </div>
+                        <div class="colors" style="font-weight:normal; text-align: center">
+                            <div class="quartile" style="padding-top: 5px">5000-6000</div>
+                            <div class="quartile" style="padding-top: 5px">6000-7000</div>
+                            <div class="quartile" style="padding-top: 5px">7000-8000</div>
+                            <div class="quartile" style="padding-top: 5px">8000-9000</div>
+                            <div class="quartile" style="padding-top: 5px">9000-10000</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+
+    </div>
+    
+
+
+    <script type="infowindow/html" id="land_infowindow_template">
+        <div class="cartodb-popup">
+            <a href="#close" class="cartodb-popup-close-button close">x</a>
+            <div class="cartodb-popup-content-wrapper">
+                <div class="cartodb-popup-content">
+                    <h4>Name</h4>
+                    <p>{{zonename}}</p>
+                    <h4>Land Type</h4>
+                    <p>{{mgmt_area}}</p>
+                    <h4>Acres</h4>
+                    <p>{{acres}}</p>
+                </div>
+            </div>
+    </script>
+
+
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+
+
+
+    <script type="cartocss/html" id="osmptrails-styles">
+        #layer { line-width: 5; line-color: ramp([length_mi], (#ffc6c4, #ee919b, #cc607d, #9e3963, #672044), equal); }
+    </script>
+
+    <script type="cartocss/html" id="osmptrailheads-styles">
+        #layer { marker-width: 15; marker-fill: ramp([elevation], (#ecda9a, #f1b973, #f7945d, #f86f56, #ee4d5a), equal); marker-fill-opacity: 1; marker-allow-overlap: true; marker-line-width: 1; marker-line-color: #FFF; marker-line-opacity: 1; }
+    </script>
+
+    <script type="cartocss/html" id="osmpmanagementareas-styles">
+        #layer { polygon-fill: ramp([mgmt_area], (#5F4690, #1D6996, #38A6A5, #0F8554, #73AF48, #EDAD08, #E17C05, #CC503E, #94346E), ("Natural Area", "Passive Recreation Area", "Habitat Conservation Area", "Agricultural Area", "Natural Area - Conditional", "Habitat Conservation Area - Conditional", "Passive Recreation Area - Conditional", "TBD", "Agricultural Area - Conditional"), "="); polygon-opacity: 0.4; line-width: 1; line-color: #ffffff; line-opacity: 0; }
+    </script>
+
+
+    <script>
+        
+        // Draws map and centers it to zoom point
+        var map = L.map('map', {
+            center: [40.0150, -105.19],
+            zoom: 12,
+        });
+        
+        // Brings in leaflet map from leaflet providers
+        var tiles = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            subdomains: 'abcd',
+            minZoom: 0,
+            maxZoom: 18,
+            ext: 'png'
+        });
+        map.addLayer(tiles);
+        
+        // Adds CartoDB hosted web map
+        var sourceObject = {
+            user_name: 'owenjeff',
+            type: 'cartodb',
+            sublayers: [
+                {
+                    // Loads CartoDB geojson dataset from sql query, the same goes for the 2 other layers...
+                    sql: "SELECT * FROM osmpmanagementareas",
+                    // Uses css rules from cartoDB
+                    cartocss: $("#osmpmanagementareas-styles").text(),
+                    // Sets interactivity from cartoDB ID
+                    interactivity: 'cartodb_id'
+          },
+                {
+                    sql: "SELECT * FROM osmptrails",
+                    cartocss: $("#osmptrails-styles").text(),
+                    interactivity: 'cartodb_id'
+          }, {
+                    sql: "SELECT * FROM osmptrailheads",
+                    cartocss: $("#osmptrailheads-styles").text(),
+                    interactivity: 'cartodb_id'
+          },
+      ]
+        };
+        
+        // Uses create layer method with the parameters of map and source object
+        cartodb.createLayer(map, sourceObject)
+            
+            // initiates function to create info windows with layer and vis set as parameters
+            .done(function (layer, vis) {
+                
+                // Does function to create hover info window in sublayer 1 and the same for sublayer 2
+                var sublayer = layer.getSubLayer(1);
+                // Passes 2 attributes to show up in info window
+                sublayer.setInteractivity('name, length_mi');
+                // This is the mouse hover function
+                layer.leafletMap.viz.addOverlay({
+                    // Sets the type of info window that comes from hover function
+                    type: 'tooltip',
+                    // Sets window from the sublayer
+                    layer: sublayer,
+                    // Uses html template to draw text in info window
+                    template: '<div class="cartodb-tooltip-content-wrapper"><div class="cartodb-tooltip-content">{{name}} Trail <br> {{length_mi}} miles </div>',
+                    position: 'bottom|right',
+                    // Uses name as the primary field for info window
+                    fields: [{
+                        name: 'name'
+                        }]
+                });
+                var sublayer = layer.getSubLayer(2);
+                sublayer.setInteractivity('name, elevation');
+                layer.leafletMap.viz.addOverlay({
+                    type: 'tooltip',
+                    layer: sublayer,
+                    template: '<div class="cartodb-tooltip-content-wrapper"><div class="cartodb-tooltip-content">{{name}} Trailhead <br>Elevation: {{elevation}} Feet</div>',
+                    position: 'bottom|right',
+                    fields: [{
+                        name: 'name'
+                        }]
+                });
+                
+                // Uses infowindow click function to info window from html infowindow template
+                cartodb.vis.Vis.addInfowindow(map, layer.getSubLayer(0), ['zonename', 'mgmt_area', 'acres'], {
+                    // Calls up info window template from the html
+                    infowindowTemplate: $('#land_infowindow_template').text()
+                });
+            // Adds all feature to the map
+            }).addTo(map);
+    </script>
+
+</body>
+
+</html>
