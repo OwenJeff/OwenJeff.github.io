@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Lab 06 Starter</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: "Noto Sans", sans-serif;
+            color: #3d3d3d;
+        }
+        
+        section {
+            width: 960px;
+            margin: 20px auto;
+        }
+        
+        h1 {
+            width: 960px;
+            margin: 20px auto;
+            font-family: "Lora", serif;
+            letter-spacing: .04em;
+        }
+        
+        h2 {
+            font-family: "Lora", serif;
+            letter-spacing: .04em;
+        }
+        
+        p {
+            font-size: 1em;
+            line-height: 1.5em;
+        }
+        
+        a {
+            color: #005daa;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        #map {
+            width: 960px;
+            height: 540px;
+            margin: 10px auto;
+            border: 2px solid #d3d3d3;
+        }
+        .image {
+            width: 120px;
+            height: 100px;
+            }
+        img {
+            display: block;
+            margin: 0 auto;
+            height: 200px;
+            width: 950px;
+        }
+        .washington-green {
+            color:#83b023;
+        }
+        
+        .oregon-blue {
+            color:#0c5485;
+        }
+        
+        .california-red {
+            color:#bc2739; 
+        }
+    </style>
+</head>
+
+<body>
+    <h1>West Coast Cities of the United States</h1>
+
+    <img src="_1419_stitch_small.jpg">
+    
+    <section>
+    
+    <p>Golden Gate Bridge in San Francisco, California</p>
+        
+    <p>The link to this image is found here: <a href="http://www.mfasold.net/blog/2008/11/southwest-usa-tour-photos-1/_1419_stitch_small/">Golden Gate Bridge Panorama</a></p>
+
+    </section>
+    
+    <div id='map'></div>
+
+
+    <section>
+
+        <p>Map authored by Owen Mickelson on November 18, 2016</p>
+
+        <p>This map was created to show the locations of my favorite west coast cities. The funny part about these cities is, I have never been to any of them. I have always wanted to travel to San Francisco and the surrounding areas. I have been to California but only the southern portion which might as well be a completely different state from its northern half. I have also never been to Oregon or Washington. I hope at some point in the furture to take a trip out to those regions of the United States and explore those geographic areas.</p>
+        
+        <p>Additional information about Seattle, Washington is located here: <a href="https://en.wikipedia.org/wiki/Seattle"> Seattle, Washington</a> and the popup image is from here: <a href="https://www.spaceneedle.com/hours-directions/"> Space Needle</a> </p>
+        
+        <p>More information about Portland, Oregon is found here: <a href="https://en.wikipedia.org/wiki/Portland,_Oregon"> Portland, Oregon</a> and the popup image is from here: <a href="https://www.travelportland.com/things-to-do/"> Travel Portland</a> </p>
+        
+        <p>The information about San Francisco, California is pinned here: <a href="https://en.wikipedia.org/wiki/San_Francisco"> San Francisco, California</a> and the popup image is from here: <a href="https://www.tripadvisor.com/Tourism-g60713-San_Francisco_California-Vacations.html"> Trip Advisor</a> </p>
+
+    </section>
+
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+
+    <script>
+        
+        // Begin writing/modifying code for Lab 06 here
+        
+        
+        var map = L.map('map', {
+            center: [43.5, -122],
+            zoom: 5,
+        });
+
+        var tiles = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        });
+        map.addLayer(tiles);
+
+       
+        // define the cities data within an object and store all within an array
+
+        
+        var cities = [{
+                name: "Seattle, Washington",
+                properties: {
+                    coordinates: [47.6062, -122.3321],
+                    population: 652405 ,
+                    state: "WA",
+                    image: "view-from-heli-250x211.jpg",
+                    link: "https://www.spaceneedle.com/hours-directions/"
+                }
+            },
+            {
+                name: "Portland, Oregon",
+                properties: {
+                    coordinates: [45.5231, -122.6765],
+                    population: 609456,
+                    state: "OR",
+                    image: "whitestag2576.jpg",
+                    link: "https://www.travelportland.com/things-to-do/"
+                }
+            },
+            {
+                name: "San Francisco, California",
+                properties: {
+                    coordinates: [37.7749, -122.4194],
+                    population: 837442,
+                    state: "CA",
+                    image: "culture-and-cocktails.jpg",
+                    link: "https://www.tripadvisor.com/Tourism-g60713-San_Francisco_California-Vacations.html"
+                }
+            }];
+
+        // loop through each city
+        
+        
+        for (var i = 0; i < cities.length; i++) {
+            
+            console.log(cities[i]);
+            
+            // create a variable to access each city's properties
+            
+            
+            var props = cities[i].properties;
+            
+            // create a variable to store the popup content for each city
+            
+            
+            var popup = buildPopup(props.image, props.link, cities[i].name, props.population, props.state);
+
+            // create a Leaflet marker with the city's coordinates and bind the popup
+            
+            
+            L.marker(props.coordinates).addTo(map)
+            .bindPopup(popup);
+            
+        }
+            
+           // retrieve this content with a call to a function that will assign a CSS class name to a variable used to color the text 
+        
+        
+        function buildPopup(image, link, name, population, state) {
+        
+            if(state == "WA") {
+            var colorClass = "washington-green";
+            }
+            
+            else if(state == "OR") {
+            var colorClass = "oregon-blue";
+            }
+            
+            else if(state == "CA") {
+            var colorClass = "california-red";
+            }
+            
+            // return a string concatenating the name and population of each city within HTML, assign the return value of the function to the popup variable
+            
+            
+            return "<img class='image' src='"+image+"'><br>" +
+            "<a href='"+link+"'>Click here for more Info about this location</a>" +
+            "<div class='"+colorClass+"'><b>"+cities[i].name+"</b><br>"+
+            "<b>Population</b>: "+population.toLocaleString()+"<div>";
+                
+            
+            }
+        
+        </script>
+
+</body>
+
+</html>
