@@ -274,7 +274,9 @@
         };
         
         // Uses create layer method with the parameters of map and source object
-        cartodb.createLayer(map, sourceObject)
+        cartodb.createLayer(map, sourceObject, {
+                    https: true
+                })
             
             // initiates function to create info windows with layer and vis set as parameters
             .done(function (layer, vis) {
